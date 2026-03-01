@@ -12,7 +12,7 @@ import com.cloudapp.cloudapp.model.User;
 import com.cloudapp.cloudapp.service.UserService;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/users") //all routes start with /users
 public class UserController {
 
     //logger
@@ -25,13 +25,16 @@ public class UserController {
         this.service = service;
     }
 
+
+    //displays all users
     @GetMapping
     public String listUsers(Model model) {
         log.info("Listing all users"); //log
         model.addAttribute("users", service.findAll());
-        return "users-list";
+        return "users-list"; //returns users-list template to render
     }
 
+    //loads create form for new user
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         log.info("Opening form to create a new user"); //log
@@ -39,6 +42,7 @@ public class UserController {
         return "user-form";
     }
 
+    //Saves new user to database
     @PostMapping
     public String createUser(@ModelAttribute("user") User user) {
         log.info("Creating new user: {}", user.getEmail()); //log
@@ -46,13 +50,15 @@ public class UserController {
         return "redirect:/users";
     }
 
+    //shows form for editing with user's info already there
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
         log.info("Editing user: {}, id");
-        model.addAttribute("user", service.findById(id));
-        return "user-form";
+        model.addAttribute("user", service.findById(id)); //loads user info from databse
+        return "user-form"; //uses user-form (same as for creating)
     }
 
+    //saves new edits
     @PostMapping("/{id}")
     public String updateUser(@PathVariable Integer id, @ModelAttribute("user") User user) {
         log.info("Updating user: {}, id");
@@ -61,12 +67,15 @@ public class UserController {
         return "redirect:/users";
     }
 
+    //deletes user
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable Integer id) {
         log.warn("Deleting user: {}, id");
         service.deleteById(id);
         return "redirect:/users";
     }
+
+    //shows user contact info only
     @GetMapping("/contacts")
     public String showAllContacts(Model model) {
     model.addAttribute("users", service.findAll());

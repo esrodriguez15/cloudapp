@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CloudAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CloudAppApplication.class, args);
+		SpringApplication.run(CloudAppApplication.class, args); //launches springboot
 	}
 
 }
