@@ -12,7 +12,7 @@ import com.cloudapp.cloudapp.model.User;
 import com.cloudapp.cloudapp.service.UserService;
 
 @Controller
-@RequestMapping("/users") //all routes start with /users
+@RequestMapping("/users") //all routes must start with /users - updating this comment for CI/CD purposes
 public class UserController {
 
     //logger

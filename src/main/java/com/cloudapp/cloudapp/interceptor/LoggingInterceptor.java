@@ -14,18 +14,20 @@ public class LoggingInterceptor implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(LoggingInterceptor.class);
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
+    {
         logger.info("[ENTER] {} {}", request.getMethod(), request.getRequestURI());
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-            Exception ex) {
-        if (ex != null) {
+            Exception ex) 
+    {
+        if (ex != null) 
+        {
             logger.error("[EXCEPTION] {} - {}", ex.getClass().getSimpleName(), ex.getMessage());
         }
         logger.info("[EXIT] {} {}", request.getMethod(), request.getRequestURI());
     }
-
 }
